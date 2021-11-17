@@ -34,7 +34,7 @@ public class User implements Serializable {
 	private Set<Role> roles = new HashSet<>();
 
 	@OneToMany(mappedBy = "user")
-	private List<Notification> notification = new ArrayList<>();
+	private List<Notification> notifications = new ArrayList<>();
 	
 	public User() {
 
