@@ -39,8 +39,11 @@ public abstract class Lesson implements Serializable {
 	private List<Deliver> deliveries = new ArrayList<>();	
 
 	@ManyToMany
-	@JoinTable(name = "tb_lessons_done", joinColumns = @JoinColumn(name = "lesson_id"), inverseJoinColumns = {
-			@JoinColumn(name = "user_id"), @JoinColumn(name = "offer_id") })
+	@JoinTable(name = "tb_lessons_done", 
+	joinColumns = @JoinColumn(name = "lesson_id"), 
+	inverseJoinColumns = {
+	@JoinColumn(name = "user_id"), @JoinColumn(name = "offer_id")})
+	
 	private Set<Enrollment> enrollmentsDone = new HashSet<>();
 
 
@@ -61,6 +64,10 @@ public abstract class Lesson implements Serializable {
 
 	public Long getId() {
 		return id;
+	}
+
+	public List<Deliver> getDeliveries() {
+		return deliveries;
 	}
 
 	public void setId(Long id) {
