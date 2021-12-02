@@ -33,7 +33,7 @@ public class User implements UserDetails, Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
-	
+
 	@Column(unique = true)
 	private String email;
 	private String password;
@@ -45,10 +45,6 @@ public class User implements UserDetails, Serializable {
 	@OneToMany(mappedBy = "user")
 	private List<Notification> notifications = new ArrayList<>();
 
-	
-	
-
-	
 	public User() {
 
 	}
@@ -98,12 +94,9 @@ public class User implements UserDetails, Serializable {
 		return roles;
 	}
 
-
 	public List<Notification> getNotifications() {
 		return notifications;
 	}
-
-	
 
 	@Override
 	public int hashCode() {
@@ -129,12 +122,11 @@ public class User implements UserDetails, Serializable {
 			return false;
 		return true;
 	}
-	
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 
-		return roles.stream().map(role -> new SimpleGrantedAuthority(role.getAuthority()))
-				.collect(Collectors.toList());
+		return roles.stream().map(role -> new SimpleGrantedAuthority(role.getAuthority())).collect(Collectors.toList());
 
 	}
 
@@ -165,6 +157,13 @@ public class User implements UserDetails, Serializable {
 		return true;
 	}
 
+	public boolean hasHole(String roleName) {
+		for (Role role : roles) {
+			if (role.getAuthority().equals(roleName)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 }
-
-
